@@ -1,39 +1,22 @@
 <script setup>
-import HomePanel from './HomePanel.vue'
-import { getGoodsAPI } from '@/apis/home';
-import { ref, onMounted } from 'vue';
-import GoodsItem from './GoodsItem.vue';
-//获取数据列表
-const goodsProduct = ref([])
-const getGoods = async () => {
-    const res = await getGoodsAPI()
-    goodsProduct.value = res.result
-}
-onMounted(() => getGoods())
+defineProps({
+    good: {
+        type: Object,
+        default: () => { }
+    }
+})
 </script>
 
 <template>
-    <div class="home-product">
-        <HomePanel :title="cate.name" v-for="cate in goodsProduct" :key="cate.id">
-            <div class="box">
-                <RouterLink class="cover" to="/">
-                    <img v-img-lazy="cate.picture" />
-                    <strong class="label">
-                        <span>{{ cate.name }}馆</span>
-                        <span>{{ cate.saleInfo }}</span>
-                    </strong>
-                </RouterLink>
-                <ul class="goods-list">
-                    <li v-for="good in cate.goods" :key="good.id">
-                        <GoodsItem :good="good" />
-                    </li>
-                </ul>
-            </div>
-        </HomePanel>
-    </div>
+    <RouterLink to="/" class="goods-item">
+        <img v-img-lazy="good.picture" alt="" />
+        <p class="name ellipsis">{{ good.name }}</p>
+        <p class="desc ellipsis">{{ good.desc }}</p>
+        <p class="price">&yen;{{ good.price }}</p>
+    </RouterLink>
 </template>
 
-<style scoped lang='scss'>
+<style lang="scss">
 .home-product {
     background: #fff;
     margin-top: 20px;
