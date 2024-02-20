@@ -5,8 +5,8 @@ import { ref, onMounted } from 'vue'
 const bannerList = ref([])
 
 const getBanner = async () => {
-
     const res = await getBannerAPI()
+    console.log(res)
     bannerList.value = res.result
 }
 
@@ -16,7 +16,7 @@ onMounted(() => getBanner())
 <template>
     <div class="home-banner">
         <el-carousel height="500px">
-            <el-carousel-item v-for="item in bannerList" :key="item.id">
+            <el-carousel-item v-for="item in bannerList" :key="item.id" v-show="1">
                 <img :src="item.imgUrl">
             </el-carousel-item>
         </el-carousel>
@@ -33,6 +33,7 @@ onMounted(() => getBanner())
     left: 0;
     top: 0;
     z-index: 98;
+    display: block;
 
     img {
         width: 100%;
