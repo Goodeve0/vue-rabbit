@@ -1,9 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { loginAPI } from '@/apis/user'
+
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router';
+
+import { useUserStore } from '@/stores/user'
+const UserStore = useUserStore()
 //表单校验（账户名+密码）
 
 //1.准备表单对象
@@ -50,7 +53,7 @@ const doLogin = () => {
             //TODO LOGIN
             //1.提示用户
             //🔥弹框不显示，为啥
-            await loginAPI({ account, password })
+            await UserStore.getUserInfo({ account, password })
             ElMessage({ type: 'success', message: '登陆成功' })
             //2.跳转首页
             router.replace({ path: '/' })
