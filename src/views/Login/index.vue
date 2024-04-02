@@ -52,7 +52,7 @@ const doLogin = () => {
         if (valid) {
             //TODO LOGIN
             //1.提示用户
-            //🔥弹框不显示，为啥
+            //🔥弹框不显示，为啥=>没加载，第二天打开就显示了(●'◡'●)
             await UserStore.getUserInfo({ account, password })
             ElMessage({ type: 'success', message: '登陆成功' })
             //2.跳转首页
