@@ -24,11 +24,19 @@ const getOrderList = async () => {
 }
 
 onMounted(() => getOrderList())
+//加载的老慢了，得把拦截器改成8s以上
+
+//tab切换
+const tabChange = (type) => {
+    console.log(type)
+    params.value.orderState = type
+    getOrderList()
+}
 </script>
 
 <template>
     <div class="order-container">
-        <el-tabs>
+        <el-tabs @tab-change="tabChange">
             <!-- tab切换 -->
             <el-tab-pane v-for="item in tabTypes" :key="item.name" :label="item.label" />
 
